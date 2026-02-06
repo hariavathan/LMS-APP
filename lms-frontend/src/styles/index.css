@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #eab308;
+  --primary-color-rgb: 234, 179, 8;
+  --primary-glow: rgba(234, 179, 8, 0.22);
+}
+
+/* Root background */
+body {
+  @apply text-gray-100;
+  background-color: #020617;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro", "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Moving gradient behind the image */
+.lms-bg-animated {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background-image: linear-gradient(120deg,
+      #020617,
+      #0f172a,
+      #111827,
+      #1f2937,
+      #020617);
+  background-size: 320% 320%;
+  animation: gradient-shift 26s ease infinite;
+}
+
+/* Background image layer with slow pan effect */
+.lms-bg-image {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url("https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1600");
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.06);
+  opacity: 0.35;
+  animation: subtle-pan 40s ease-in-out infinite alternate;
+}
+
+/* Vignette + glass overlay */
+.lms-bg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at top left, var(--primary-glow), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.9), #020617);
+}
+
+/* Glassmorphism card */
+.lms-card {
+  @apply bg-slate-900/75 rounded-2xl shadow-2xl backdrop-blur-xl;
+  border: 1px solid color-mix(in srgb, var(--primary-color), transparent 75%);
+}
+
+/* Primary button */
+.lms-btn-primary {
+  @apply text-black font-semibold rounded-full px-5 py-2 text-sm shadow-lg transition;
+  background: var(--primary-color);
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+/* Secondary */
+.lms-btn-secondary {
+  @apply rounded-full px-4 py-2 text-xs transition;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+
+  &:hover {
+    background: color-mix(in srgb, var(--primary-color), transparent 90%);
+  }
+}
+
+/* Inputs */
+.lms-input {
+  @apply w-full bg-slate-900/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-gray-100 placeholder:text-slate-500 focus:outline-none focus:ring-2;
+  --tw-ring-color: color-mix(in srgb, var(--primary-color), transparent 20%);
+}
+
+/* Labels */
+.lms-label {
+  @apply block text-xs font-medium text-gray-300 mb-1;
+}
+
+/* Table */
+.lms-table {
+  @apply min-w-full text-sm text-gray-100;
+}
+
+.lms-table th {
+  @apply px-3 py-2 text-left bg-slate-900/80 border-b border-slate-700 text-xs font-semibold text-gray-300;
+}
+
+.lms-table td {
+  @apply px-3 py-2 border-b border-slate-800;
+}
+
+/* Animations */
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 4s infinite ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-slow {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Brand Utilities */
+.lms-text-brand {
+  color: var(--primary-color);
+}
+
+.lms-border-brand {
+  border-color: var(--primary-color);
+}
+
+.lms-bg-brand {
+  background-color: var(--primary-color);
+}
+
+/* Animated gradient keyframes */
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Subtle background pan */
+@keyframes subtle-pan {
+  0% {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: scale(1.08) translate3d(-10px, -8px, 0);
+  }
+
+  100% {
+    transform: scale(1.06) translate3d(8px, 6px, 0);
+  }
+}
